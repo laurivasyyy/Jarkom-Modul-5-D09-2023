@@ -503,3 +503,48 @@ Jika saat melakukan testing kita berada di luar aturan parameter waktu yang dibe
 * Tidak sesuai dengan parameter waktu yang diberikan :
 
     ![5b](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/5b.png)
+
+### Nomor 6
+> Soal : Lalu, karena ternyata terdapat beberapa waktu di mana network administrator dari WebServer tidak bisa stand by, sehingga perlu ditambahkan rule bahwa akses pada hari Senin - Kamis pada jam 12.00 - 13.00 dilarang (istirahat maksi cuy) dan akses di hari Jumat pada jam 11.00 - 13.00 juga dilarang (maklum, Jumatan rek).
+```
+iptables -A INPUT -m time --timestart 12:00 --timestop 13:00 --weekdays Mon,Tue,Wed,Thu -j DROP
+iptables -A INPUT -m time --timestart 11:00 --timestop 13:00 --weekdays Fri -j DROP
+```
+* `iptables -A INPUT`: Menambahkan aturan baru ke bagian INPUT.
+* `-m time` : Memfilter berdasarkan waktu.
+* `--timestart 12:00`: Memulai pada pukul 12:00.
+* `--timestop 13:00`: Mengakhiri pada pukul 13:00.
+* `--weekdays Mon,Tue,Wed,Thu`: Aturan berlaku hanya pada hari yang disebutkan.
+* `-j DROP`: Drop paket yang memenuhi aturan.
+
+### Testing
+Test dengan tanggal 2024-03-15 Friday 14:00:00 :
+
+Test dengan tanggal 2024-03-15 Friday 12:00:00 :
+
+### Nomor 7
+
+### Nomor 8
+
+### Nomor 9
+> Soal : Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit. 
+(clue: test dengan nmap)
+```
+iptables -N scan_port
+iptables -A INPUT -m recent --name scan_port --update --seconds 600 --hitcount 20 -j DROP 
+iptables -A FORWARD -m recent --name scan_port --update --seconds 600 --hitcount 20 -j DROP
+
+iptables -A INPUT -m recent --name scan_port --set -j ACCEPT
+iptables -A FORWARD -m recent --name scan_port --set -j ACCEPT
+```
+* `iptables -N scan_port`: Membuat rantai bernama scan_port yang akan digunakan untuk mengelola aturan port scanning
+* `iptables -A INPUT`: Menambahkan aturan baru ke bagian INPUT.
+* `-m recent --name scan_port`: Menggunakan modul recent untuk melacak paket.
+* `--update`: Update informasi paket.
+* `--seconds 600`: Menetapkan waktu 600 detik / 10 menit.
+* `--hitcount 20`: Meng-set batasan paket untuk menjalankan perintah selanjutnya.
+* `-j DROP`: Drop paket yang memenuhi aturan.
+* `iptables -A FORWARD -m recent --name portscan --update --seconds 600 --hitcount 20 -j DROP`: Menambahkan aturan ke chain forward.
+* `iptables -A INPUT -m recent --name scan_port --set -j ACCEPT`: Menerima paket yang tidak menyalahi aturan DROP sebelumnya.
+* `iptables -A FORWARD -m recent --name scan_port --set -j ACCEPT`: Menambahkan aturan ke chain forward.
+  
