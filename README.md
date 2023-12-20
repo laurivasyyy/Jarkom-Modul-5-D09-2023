@@ -534,9 +534,9 @@ iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.26.14.142 -m statistic --
 iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.26.14.142 -j DNAT --to-destination 10.26.8.2:443
 ```
 ### Testing
-https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/7a.png
-https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/7b.png
-https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/7.png
+![7](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/7a.png)
+![7a](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/7b.png)
+![7b](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/7.png)
 
 ### Nomor 8
 > Soal : Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024.
