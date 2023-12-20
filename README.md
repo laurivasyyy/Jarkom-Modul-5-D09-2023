@@ -518,10 +518,10 @@ iptables -A INPUT -m time --timestart 11:00 --timestop 13:00 --weekdays Fri -j D
 * `-j DROP`: Drop paket yang memenuhi aturan.
 
 ### Testing
-Test dengan tanggal 2024-03-15 Friday 14:00:00 :
-
-Test dengan tanggal 2024-03-15 Friday 12:00:00 :
-
+Test ke node stark(10.26.14.142) dengan tanggal 2024-03-15 Friday 14:00:00 :
+![6_acc](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/no6_acc.png)
+Test ke node stark(10.26.14.142) dengan tanggal 2024-03-15 Friday 12:00:00 :
+![6_drop](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/no6_drop.png)
 ### Nomor 7
 
 ### Nomor 8
@@ -547,4 +547,11 @@ iptables -A FORWARD -m recent --name scan_port --set -j ACCEPT
 * `iptables -A FORWARD -m recent --name portscan --update --seconds 600 --hitcount 20 -j DROP`: Menambahkan aturan ke chain forward.
 * `iptables -A INPUT -m recent --name scan_port --set -j ACCEPT`: Menerima paket yang tidak menyalahi aturan DROP sebelumnya.
 * `iptables -A FORWARD -m recent --name scan_port --set -j ACCEPT`: Menambahkan aturan ke chain forward.
-  
+
+### Testing
+test menggunakan ping ke node sein (10.26.8.2):
+![9_ping](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/no9_ping.png)
+test menggunakan nmap dengan paket 20:
+![9_nmap](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/no9_nmap_p20.png)
+test menggunakan nmap dengan paket 30:
+![9_nmap30](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/no9_nmap_p30.png)
