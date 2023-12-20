@@ -525,7 +525,23 @@ Test ke node stark(10.26.14.142) dengan tanggal 2024-03-15 Friday 12:00:00 :
 ### Nomor 7
 
 ### Nomor 8
+> Soal : Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024.
+```
+iptables -A INPUT -p tcp --dport 80 -s 10.26.14.128/30 -m time --datestart 2024-02-14T00:00 --datestop 2024-06-26T23:59 -j DROP
+```
+* `iptables -A INPUT`: Menambahkan aturan baru ke bagian INPUT.
+* `-p tcp`: Protokol yang digunakan.
+* `--dport 80`: Port tujuan
+* `-s 10.26.14.128/30`: Source subnet id
+* `-m time`: Memfilter berdasarkan waktu.
+* `time --datestart 2024-02-14T00:00`: Memulai pada tanggal yang disebutkan.
+* `--datestop 2024-06-26T23:59`: Mengakhiri pada tanggal yang disebutkan.
+* `-j DROP`: Mendrop paket yang memenuhi aturan.
 
+### Testing
+Node selain revolte (laubhills) pada tanggal 2024-03-15 (tanggal yang berada di interval aturan):
+
+Node revolte pada tanggal 2024-03-15 (tanggal yang berada di interval aturan):
 ### Nomor 9
 > Soal : Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit. 
 (clue: test dengan nmap)
