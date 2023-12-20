@@ -540,8 +540,11 @@ iptables -A INPUT -p tcp --dport 80 -s 10.26.14.128/30 -m time --datestart 2024-
 
 ### Testing
 Node selain revolte (laubhills) pada tanggal 2024-03-15 (tanggal yang berada di interval aturan):
-
+![8_laubhills](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/no8_laubhills.png)
+Terlihat bahwa state port 80 open. <br>
 Node revolte pada tanggal 2024-03-15 (tanggal yang berada di interval aturan):
+![8_revolte](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/no8_revolte.png)
+Terlihat bahwa state port 80 filtered yang berarti tidak dapat diakses.
 ### Nomor 9
 > Soal : Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit. 
 (clue: test dengan nmap)
