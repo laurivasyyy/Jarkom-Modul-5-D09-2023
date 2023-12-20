@@ -522,7 +522,21 @@ Test ke node stark(10.26.14.142) dengan tanggal 2024-03-15 Friday 14:00:00 :
 ![6_acc](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/no6_acc.png)
 Test ke node stark(10.26.14.142) dengan tanggal 2024-03-15 Friday 12:00:00 :
 ![6_drop](https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/no6_drop.png)
+
 ### Nomor 7
+> Soal : Karena terdapat 2 WebServer, kalian diminta agar setiap client yang mengakses Sein dengan Port 80 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan dan request dari client yang mengakses Stark dengan port 443 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan.
+
+Lakukan pre-routing berikut pada router yang dekat dengan webserver yaitu frieren dan heiter, jangan lupa untuk mengahapus rules `IPTABLES` yang ada pada node stark dan sein agar tidak terjadi penumpukan rules. Jika masih terjadi error, jalankan perintah `service apache2 stop` dan jalankan perintah `iptables -t nat -L PREROUTING -n -v --line-number` pada node frieren dan heiter serta `iptables -L` pada node stark dan sein untuk mengecek apakah rules dari iptables sudah oke atau belum (kalau sudah oke maka hanya terdapat 4 line keterangan ip tables).
+```
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 10.26.8.2 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.26.8.2:80
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 10.26.8.2 -j DNAT --to-destination 10.26.14.142:80
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.26.14.142 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.26.14.142:443
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.26.14.142 -j DNAT --to-destination 10.26.8.2:443
+```
+### Testing
+https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/7a.png
+https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/7b.png
+https://github.com/laurivasyyy/Jarkom-Modul-5-D09-2023/blob/main/assets/7.png
 
 ### Nomor 8
 > Soal : Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024.
